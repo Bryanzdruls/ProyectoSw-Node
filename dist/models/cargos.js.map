@@ -1,0 +1,1 @@
+{"version":3,"file":"cargos.js","sourceRoot":"","sources":["../../models/cargos.ts"],"names":[],"mappings":";;;;;AAAA,yCAAoC;AACpC,8DAAgC;AAEhC,MAAM,KAAK,GAAG,kBAAE,CAAC,MAAM,CAAC,OAAO,EAAC;IAC5B,WAAW,EAAE;QACT,IAAI,EAAE,qBAAS,CAAC,MAAM;KACzB;CACJ,EAAC;IACE,SAAS,EAAC,QAAQ;IAClB,UAAU,EAAC,KAAK;CACnB,CAAC,CAAC;AAEH,kBAAe,KAAK,CAAC"}

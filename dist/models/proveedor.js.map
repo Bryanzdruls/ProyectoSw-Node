@@ -1,0 +1,1 @@
+{"version":3,"file":"proveedor.js","sourceRoot":"","sources":["../../models/proveedor.ts"],"names":[],"mappings":";;;;;AAAA,yCAAoC;AACpC,8DAAgC;AAGhC,MAAM,SAAS,GAAG,kBAAE,CAAC,MAAM,CAAC,WAAW,EAAC;IACpC,eAAe,EAAE;QACb,IAAI,EAAE,qBAAS,CAAC,MAAM;QACtB,SAAS,EAAC,KAAK;KAClB;CACJ,EAAC;IACE,SAAS,EAAC,WAAW;IACrB,UAAU,EAAC,KAAK;CACnB,CAAC,CAAC;AAEH,kBAAe,SAAS,CAAC"}

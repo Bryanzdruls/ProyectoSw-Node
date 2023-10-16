@@ -1,0 +1,1 @@
+{"version":3,"file":"premio.js","sourceRoot":"","sources":["../../models/premio.ts"],"names":[],"mappings":";;;;;AAAA,yCAAoC;AACpC,8DAAgC;AAMhC,MAAM,MAAM,GAAG,kBAAE,CAAC,MAAM,CAAC,QAAQ,EAAC;IAC9B,kBAAkB,EAAE;QAChB,IAAI,EAAE,qBAAS,CAAC,IAAI;QACpB,SAAS,EAAC,KAAK;KAClB;CACJ,EAAC;IACE,UAAU,EAAC,KAAK;IAChB,SAAS,EAAC,QAAQ;CACrB,CAAC,CAAC;AAGH,kBAAe,MAAM,CAAC"}
