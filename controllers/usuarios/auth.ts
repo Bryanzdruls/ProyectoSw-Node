@@ -5,7 +5,7 @@ import { generarJWT } from "../../helpers";
 
 export const login = async(req:Request, res:Response) =>{
     const {email, password} = req.body;
-
+    
     try {
         const usuario = await Usuario.findOne({
             where:{
@@ -47,3 +47,15 @@ export const login = async(req:Request, res:Response) =>{
         })
     }
 }
+export const revalidarToken = async(req:Request,res:Response) => {
+    const {usuario} = req;
+    
+
+    //generar nuevo token y retornarlo
+    const token =  await generarJWT(usuario.id);
+    res.json({
+        ok:true,
+        usuario, 
+        token
+    })
+};

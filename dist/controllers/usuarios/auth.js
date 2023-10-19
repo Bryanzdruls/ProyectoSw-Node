@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = void 0;
+exports.revalidarToken = exports.login = void 0;
 const models_1 = require("../../models");
 const bcryptjs_1 = require("bcryptjs");
 const helpers_1 = require("../../helpers");
@@ -56,4 +56,15 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.login = login;
+const revalidarToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { usuario } = req;
+    //generar nuevo token y retornarlo
+    const token = yield (0, helpers_1.generarJWT)(usuario.id);
+    res.json({
+        ok: true,
+        usuario,
+        token
+    });
+});
+exports.revalidarToken = revalidarToken;
 //# sourceMappingURL=auth.js.map

@@ -2,6 +2,8 @@ import {Request,Response} from 'express';
 import Usuario from '../../models/usuario';
 import {genSaltSync,hashSync} from 'bcryptjs';
 import { Cargo } from '../../models';
+import nodemailer from 'nodemailer';
+import { transporter } from '../../helpers/nodeEmail';
 
 export const getUsuarios = async(req:Request, res:Response) => {
     try {
@@ -43,10 +45,11 @@ export const getUsuario = async(req:Request,res:Response) =>{
 }
 export const crearUsuario = async(req:Request, res:Response) => {
     
-    const {nombre, apellido, email, password, fechaNac, CargoId } = req.body;
+    const {nombre, apellido, email, password, fechaNac, CargoId, emailCred} = req.body;
     const salt = genSaltSync(10);
     const passwordEncriptada = hashSync( password, salt );
-     
+    
+    
     try {
         const usuario = await Usuario.create({
             nombre,
@@ -56,11 +59,25 @@ export const crearUsuario = async(req:Request, res:Response) => {
             fechaNac: !!fechaNac ? fechaNac:new Date(),
             CargoId
         })
-        //Encriptar Contraseña
         
+        
+        await transporter.sendMail({
+            from: '"Admin Greco S.A 👻" <eltiobryanz@gmail.com>', // sender address
+            to: emailCred, // list of receivers
+            subject: "Credenciales para el acceso a la plataforma", // Subject line
+            
+            html: `
+            <h1> Buenos dias señor/a ${nombre}</h1>
+            <b> Para ingresar al aplicativo acontinuacion le pasare las credenciales de acceso UNICAS e intrasferibles
+                Email Empresa: ${email}
+                Contraseña: ${password}
+            </b>
+            `, // html body
+          });
         return res.status(200).json({
             msg: 'usuario creado correctamente',
-            usuario
+            usuario,
+            emailCred
         })
     } catch (error) {
         console.log(error);

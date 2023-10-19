@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { login } from "../../controllers/usuarios/auth";
-import { validarCampos } from "../../middlewares";
+import { login, revalidarToken } from "../../controllers/usuarios/auth";
+import { validarCampos, validateJWT } from "../../middlewares";
 import { check } from 'express-validator';
 
 
@@ -8,10 +8,10 @@ import { check } from 'express-validator';
 const router = Router();
 
 
-router.post('/login',[
+router.post(['/','/login'],[
     check('email', 'Email is a must').isEmail(),
     check('password', 'password is a must').not().isEmpty().isLength({ min:6 }),
     validarCampos,
 ], login);
-
+router.get('/renovar',validateJWT, revalidarToken); 
 export default router;

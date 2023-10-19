@@ -16,6 +16,7 @@ exports.borrarUsuario = exports.actualizarUsuario = exports.crearUsuario = expor
 const usuario_1 = __importDefault(require("../../models/usuario"));
 const bcryptjs_1 = require("bcryptjs");
 const models_1 = require("../../models");
+const nodeEmail_1 = require("../../helpers/nodeEmail");
 const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const usuarios = yield usuario_1.default.findAll({
@@ -59,7 +60,7 @@ const getUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 exports.getUsuario = getUsuario;
 const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { nombre, apellido, email, password, fechaNac, CargoId } = req.body;
+    const { nombre, apellido, email, password, fechaNac, CargoId, emailCred } = req.body;
     const salt = (0, bcryptjs_1.genSaltSync)(10);
     const passwordEncriptada = (0, bcryptjs_1.hashSync)(password, salt);
     try {
@@ -71,10 +72,22 @@ const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             fechaNac: !!fechaNac ? fechaNac : new Date(),
             CargoId
         });
-        //Encriptar Contraseña
+        yield nodeEmail_1.transporter.sendMail({
+            from: '"Admin Greco S.A 👻" <eltiobryanz@gmail.com>',
+            to: emailCred,
+            subject: "Credenciales para el acceso a la plataforma",
+            html: `
+            <h1> Buenos dias señor/a ${nombre}</h1>
+            <b> Para ingresar al aplicativo acontinuacion le pasare las credenciales de acceso UNICAS e intrasferibles
+                Email Empresa: ${email}
+                Contraseña: ${password}
+            </b>
+            `, // html body
+        });
         return res.status(200).json({
             msg: 'usuario creado correctamente',
-            usuario
+            usuario,
+            emailCred
         });
     }
     catch (error) {
